@@ -1,0 +1,40 @@
+<?php
+
+namespace App\Models;
+
+use Attribute;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+
+class User extends Model
+{
+    use HasFactory;
+
+    protected $table = 'users';
+
+    protected $fillable = [
+        'name',
+        'email',
+        'cpf',
+        'password',
+        'role'
+    ];
+
+    protected $hidden = [
+        'password'
+    ];
+
+    //RELACIONAMENTOS
+    public function address(){
+        return $this->hasOne(Address::class); // cria relacionamento com tabela Address
+    }
+
+    public function phones(){
+        return $this->hasMany(Phone::class);
+    }
+
+    //MUTATORS
+        public function setPasswordAttribute($value){
+            $this->attributes['password'] = bcrypt($value); // CRIA HASH DA SENHA (SE TORNA MAIS SEGURO)
+        }
+}
