@@ -51,25 +51,25 @@
                 <div class="row mt-4">
                     <div class="col-md-3">
                         <div class="form-group">
-                            <input type="text" name="address[cep]" class="form-control cep {{ $errors->has('address.cep') ? 'is-invalid' : ''}}" placeholder="CEP" value="{{ old('address.cep')}}">
+                            <input type="text" name="address[cep]" class="form-control cep {{ $errors->has('address.cep') ? 'is-invalid' : ''}}" placeholder="CEP" value="{{ old('address.cep')}}" id="cep">
                             <div class="invalid-feedback">{{ $errors->first('address.cep') }}</div>
                         </div>
                     </div>
                     <div class="col-md-2">
                         <div class="form-group">
-                            <input type="text" name="address[uf]" class="form-control uf {{ $errors->has('address.uf') ? 'is-invalid' : ''}}" placeholder="UF" value="{{ old('address.uf')}}">
+                            <input type="text" name="address[uf]" class="form-control uf {{ $errors->has('address.uf') ? 'is-invalid' : ''}}" placeholder="UF" value="{{ old('address.uf')}}" id="uf">
                             <div class="invalid-feedback">{{ $errors->first('address.uf') }}</div>
                         </div>
                     </div>
                     <div class="col-md-7">
                         <div class="form-group">
-                            <input type="text" name="address[city]" class="form-control {{ $errors->has('address.city') ? 'is-invalid' : ''}}" placeholder="Cidade" value="{{ old('address.city')}}">
+                            <input type="text" name="address[city]" class="form-control {{ $errors->has('address.city') ? 'is-invalid' : ''}}" placeholder="Cidade" value="{{ old('address.city')}}" id="city">
                             <div class="invalid-feedback">{{ $errors->first('address.city') }}</div>
                         </div>
                     </div>
                     <div class="col-md-9">
                         <div class="form-group">
-                            <input type="text" name="address[street]" class="form-control {{ $errors->has('address.street') ? 'is-invalid' : ''}}" placeholder="Logradouro" value="{{ old('address.street')}}">
+                            <input type="text" name="address[street]" class="form-control {{ $errors->has('address.street') ? 'is-invalid' : ''}}" placeholder="Logradouro" value="{{ old('address.street')}}" id="street">
                             <div class="invalid-feedback">{{ $errors->first('address.street') }}</div>
                         </div>
                     </div>
@@ -81,7 +81,7 @@
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
-                            <input type="text" name="address[district]" class="form-control {{ $errors->has('address.district') ? 'is-invalid' : ''}}" placeholder="Bairro" value="{{ old('address.district')}}">
+                            <input type="text" name="address[district]" class="form-control {{ $errors->has('address.district') ? 'is-invalid' : ''}}" placeholder="Bairro" value="{{ old('address.district')}}" id="district">
                             <div class="invalid-feedback">{{ $errors->first('address.district') }}</div>
                         </div>
                     </div>
@@ -116,15 +116,9 @@
 
     <script src="{{ asset('vendor/jquery/jquery.min.js') }}"></script>
     <script src="{{ asset('vendor/jquery-mask/jquery.mask.min.js')}}"></script>
+    <script src="{{ asset('js/auth/register.js')}}"></script>
 
 
-    <script>
-        $('.cpf').mask('000.000.000-00'); // TODA CLASSE QUE TIVER ESSE NOME (CPF) VAI ENTRAR ESSA VALIDAÇÃO
-        $('.cep').mask('00000-000');
-        $('.uf').mask('SS');
-        $('.phone').mask('(00) 0000-0000');
-        $('.cellphone').mask('(00) 00000-0000');
-    </script>
 </body>
 
 </html>

@@ -50,10 +50,10 @@ class RegisterRequest extends FormRequest
     }
 
 
-    // //CRIAR MENSAGENS PERSONALIZADAS DE EZIBIÇÃO DE ERRO/VALIDAÇÃO
-    // public function messages(){
-    //     return [
-    //         'required' => 'O campo :attribute deve ser preenchido!'
-    //     ];
-    // }
+     //CRIAR MENSAGENS PERSONALIZADAS DE EZIBIÇÃO DE ERRO/VALIDAÇÃO
+     public function messages(){
+         return [
+             'required' => 'O campo :attribute deve ser preenchido!'
+         ];
+     }
 }
