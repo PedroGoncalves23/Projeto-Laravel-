@@ -27,8 +27,6 @@ class RegisterController extends Controller
         try {
             $user = User::create($requestData['user']); // CRIA O USUARIO NO BANCO
 
-            abort(500, 'Erro de teste');
-
             $user->address()->create($requestData['address']);
 
             foreach ($requestData['phones'] as $phone) {
@@ -37,7 +35,9 @@ class RegisterController extends Controller
 
             DB::commit();
 
-            return 'Conta criada com sucesso!';
+            return redirect()
+                ->route('auth.login.create')
+                ->with('success', 'Conta criada com sucesso! Efetue o login');
              
         } catch (\Exception $exception) {
             DB::rollBack();
