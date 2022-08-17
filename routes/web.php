@@ -1,9 +1,14 @@
 <?php
 
-use App\Http\Controllers\Auth\LoginController;
-use App\Http\Controllers\Auth\RegisterController;
-use App\Http\Controllers\Participant\Dashboard\DashboardController;
-use Illuminate\Auth\Events\Registered;
+use App\Http\Controllers\Auth\{
+    RegisterController,
+    LoginController
+};
+
+use App\Http\Controllers\Participant\Dashboard\DashboardController as ParticipantDashboardController;
+
+use App\Http\Controllers\Organization\Dashboard\DashboardController as OrganizationDashboardController;
+use GuzzleHttp\Middleware;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,17 +22,23 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::group(['as' => 'auth.'], function(){ // MIDDLEWARE GUEST LIMATA O USUARIO A ACESSAR ESTAS ROTAS APENAS QUANDO NÃO ESTÁ LOGADO
-    Route::group(['middleware' => 'guest'], function(){
-        Route::get('register',[RegisterController::class, 'create'])->name('register.create');
+Route::group(['as' => 'auth.'], function () {
+    Route::group(['middleware' => 'guest'], function () {
+        Route::get('register', [RegisterController::class, 'create'])->name('register.create');
         Route::post('register', [RegisterController::class, 'store'])->name('register.store');
-        Route::get('login',[LoginController::class, 'create'])->name('login.create');
-        Route::post('login',[LoginController::class,'store'])->name('login.store');
+        Route::get('login', [LoginController::class, 'create'])->name('login.create');
+        Route::post('login', [LoginController::class, 'store'])->name('login.store');
     });
-  
-    Route::post('logout', [LoginController::class,'destroy'])->name('login.destroy')->middleware('auth');
+
+    Route::post('logout', [LoginController::class, 'destroy'])
+        ->name('login.destroy')
+        ->middleware('auth');
 });
 
+Route::group(['middleware' => 'auth'], function () {
+    Route::get('participant/dashboard', [ParticipantDashboardController::class, 'index'])
+        ->name('participant.dashboard.index');
 
-Route::get('participant/dashboard', [DashboardController::class,'index'])->name('participant.dashboard.index')->middleware('auth');
-
+    Route::get('organization/dashboard', [OrganizationDashboardController::class, 'index'])
+        ->name('organization.dashboard.index');
+});
