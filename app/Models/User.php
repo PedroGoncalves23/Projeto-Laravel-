@@ -34,6 +34,11 @@ class User extends Authenticatable
         return $this->hasMany(Phone::class);
     }
 
+    public function events()
+    {
+        return $this->belongsToMany(Event::class);
+    }
+
     //MUTATORS
         public function setPasswordAttribute($value){
             $this->attributes['password'] = bcrypt($value); // CRIA HASH DA SENHA (SE TORNA MAIS SEGURO)
