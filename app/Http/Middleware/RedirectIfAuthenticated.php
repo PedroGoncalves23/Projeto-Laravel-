@@ -7,7 +7,7 @@ use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Services\UserService;
-
+//
 class RedirectIfAuthenticated
 {
     /**
@@ -33,3 +33,4 @@ class RedirectIfAuthenticated
         return $next($request);
     }
 }
+//
