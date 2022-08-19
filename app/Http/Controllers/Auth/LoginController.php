@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\LoginRequest;
 use Illuminate\Support\Facades\Auth;
+use App\Services\UserService;
 
 class LoginController extends Controller
 {
@@ -21,8 +22,13 @@ class LoginController extends Controller
         ];
 
 
+
+        // ESSA PARTE DIRECIONA O USUARIO PARA A PAGINA DO TIPO DE USUARIO QUE ELE É, APÓS O LOGIN
         if (auth::attempt($credentials)) {
-            return redirect()->route('participant.dashboard.index');
+            $userRole = auth()->user()->role;
+            return redirect(UserService::getDashboardRouteBasedOnUserRole(($userRole)));
+
+            
         }
 
         return redirect()

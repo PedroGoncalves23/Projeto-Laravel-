@@ -6,6 +6,7 @@ use App\Providers\RouteServiceProvider;
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Services\UserService;
 
 class RedirectIfAuthenticated
 {
@@ -22,8 +23,10 @@ class RedirectIfAuthenticated
         $guards = empty($guards) ? [null] : $guards;
 
         foreach ($guards as $guard) {
+            //ESSA PARTE FAZ COM QUE QUANDO USUARIO TIVER LOGADO ELE NÃO CONSEGUE IR PARA A TELA DE LOGIN
             if (Auth::guard($guard)->check()) {
-                return redirect()->route('participant.dashboard.index');
+                $userRole = auth()->user()->role;
+                return redirect(UserService::getDashboardRouteBasedOnUserRole($userRole));
             }
         }
 
